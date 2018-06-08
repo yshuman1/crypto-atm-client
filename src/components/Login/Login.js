@@ -14,6 +14,13 @@ class Login extends Component {
     };
   }
 
+  componentDidCatch(error, info) {
+    // Display fallback UI
+    this.setState({ hasError: true });
+    // You can also log the error to an error reporting service
+    logErrorToMyService(error, info);
+  }
+
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
