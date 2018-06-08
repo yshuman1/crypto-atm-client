@@ -1,21 +1,33 @@
 import React, { Component } from "react";
 import "./App.css";
+import fire from "./config/fire";
 import Login from "./components/Login/Login";
-import { Route } from "react-router-dom";
-import Success from "./components/success";
+import Home from "./components/Home";
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: {}
+    };
   }
+
+  componentDidMount() {
+    this.authListener();
+  }
+
+  authListener() {
+    fire.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({ user });
+      } else {
+        this.setState({ user: null });
+      }
+    });
+  }
+
   render() {
-    return (
-      <div className="App">
-        <Route exact path="/" component={Login} />
-        <Route exact path="/success" component={Success} />
-      </div>
-    );
+    return <div className="App">{this.state.user ? <Home /> : <Login />}</div>;
   }
 }
 

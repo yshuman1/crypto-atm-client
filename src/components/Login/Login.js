@@ -1,73 +1,95 @@
-import React from "react";
-import { Button } from "react-bootstrap";
-import axios from "axios";
+import React, { Component } from "react";
+import fire from "../../config/fire";
 
-export default class Login extends React.Component {
-  state = {
-    username: "",
-    password: ""
-  };
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.login = this.login.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.signup = this.signup.bind(this);
 
-  handleUsernameChange = event => {
-    this.setState({ username: event.target.value });
-  };
+    this.state = {
+      email: " ",
+      password: " "
+    };
+  }
 
-  handlePasswordChange = event => {
-    this.setState({ password: event.target.value });
-  };
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
 
-  login = event => {
-    event.preventDefault();
-    axios
-      .post("https://yasin-lambda-notes.herokuapp.com/login", {
-        username: this.state.username,
-        password: this.state.password
+  login(e) {
+    e.preventDefault();
+    fire
+      .auth()
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(u => {
+        console.log(u);
       })
-      .then(
-        res => {
-          this.setState({
-            success: true,
-            errorMessage: ""
-          });
-          window.localStorage.setItem("jwt_token", res.data.token);
-          this.props.history.push("/success");
-        },
-        err => {
-          this.setState({
-            success: false,
-            errorMessage: err.response.data.error
-          });
-        }
-      );
-  };
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  signup(e) {
+    e.preventDefault();
+    fire
+      .auth()
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then(u => {})
+      .then(u => {
+        console.log(u);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   render() {
-    const { username, password } = this.state;
-
     return (
-      <form onSubmit={this.login}>
-        <div className="input-field">
-          <input
-            type="text"
-            name="username"
-            value={username}
-            required={true}
-            onChange={this.handleUsernameChange}
-            placeholder="Username"
-          />
-        </div>
-        <div className="input-field">
-          <input
-            type="password"
-            name="password"
-            value={password}
-            required={true}
-            onChange={this.handlePasswordChange}
-            placeholder="Password"
-          />
-        </div>
-        <Button type="submit">Log in</Button>
-      </form>
+      <div className="col-md-6">
+        <form>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input
+              value={this.state.email}
+              onChange={this.handleChange}
+              type="email"
+              name="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Enter email"
+            />
+            <small id="emailHelp" class="form-text text-muted">
+              We'll never share your email with anyone else.
+            </small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input
+              value={this.state.password}
+              onChange={this.handleChange}
+              type="password"
+              name="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              placeholder="Password"
+            />
+          </div>
+          <button type="submit" onClick={this.login} class="btn btn-primary">
+            Login
+          </button>
+          <button
+            onClick={this.signup}
+            style={{ marginLeft: "25px" }}
+            className="btn btn-success"
+          >
+            Signup
+          </button>
+        </form>
+      </div>
     );
   }
 }
+export default Login;
