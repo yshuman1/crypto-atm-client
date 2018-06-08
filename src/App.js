@@ -5,6 +5,10 @@ import { Route } from "react-router-dom";
 import Success from "./components/success";
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {};
+  }
   render() {
     return (
       <div className="App">
