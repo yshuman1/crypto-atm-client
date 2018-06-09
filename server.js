@@ -8,7 +8,7 @@ const server = express();
 server.use(cors());
 server.use(express.json());
 server.use(express.static(path.join(__dirname, "client/build")));
-server.get("/", (req, res) => {
+server.get("/test", (req, res) => {
   res.sendFile(path.join(__dirname, "client/build/index.html"));
 });
 server.listen(process.env.PORT || 3001, () => {
