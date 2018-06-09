@@ -4,7 +4,7 @@ const path = require("path");
 const helmet = require("helmet");
 
 const server = express();
-server.use(helmet());
+// server.use(helmet());
 server.use(cors());
 server.use(express.json());
 server.use(express.static(path.join(__dirname, "client/build")));
