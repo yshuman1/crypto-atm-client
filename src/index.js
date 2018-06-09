@@ -14,7 +14,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 render(
   <Router>
     {/* <Provider store={store}> */}
-
     <App />
     {/* </Provider> */}
   </Router>,
