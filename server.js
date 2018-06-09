@@ -8,7 +8,7 @@ server.use(helmet());
 server.use(cors());
 server.use(express.json());
 server.use(express.static(path.join(__dirname, "client/build")));
-server.get("/", () => {
+server.get("/", (req, res) => {
   res.json({ message: "works fine" });
 });
 server.listen(process.env.PORT || 3001, () => {
