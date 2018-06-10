@@ -1,17 +1,27 @@
 {
   "name": "crypto-atm",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "start": "nodemon server.js"
-  },
-  "repository": "https://github.com/yshuman1/crypto-atm-client.git",
-  "author": "Yasin Shuman <email@yasin.io>",
-  "license": "MIT",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "cors": "^2.8.4",
-    "express": "^4.16.3",
-    "helmet": "^3.12.1",
-    "nodemon": "^1.17.5"
+    "axios": "^0.18.0",
+    "bootstrap": "^4.1.1",
+    "firebase": "^5.0.4",
+    "firebase-admin": "^5.12.1",
+    "jquery": "^3.3.1",
+    "popper": "^1.0.1",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.4",
+    "reactstrap": "^6.1.0",
+    "redux": "^4.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "cd client && yarn install --production[=false] && yarn install && yarn run build"
   }
 }
