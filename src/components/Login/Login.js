@@ -24,7 +24,7 @@ class Login extends Component {
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .then(u => {
-        console.log(u);
+        console.log(u.user.uid);
       })
       .catch(error => {
         console.log(error);
@@ -38,7 +38,7 @@ class Login extends Component {
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(u => {})
       .then(u => {
-        console.log(u);
+        console.log(u.user.uid);
       })
       .catch(error => {
         console.log(error);
