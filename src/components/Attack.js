@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 
 class Attack extends Component {
-  constructor(props) {
-    super(props);
-    this.logout = this.logout.bind(this);
-  }
-
   render() {
     return (
       <div>
